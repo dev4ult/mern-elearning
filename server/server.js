@@ -5,11 +5,20 @@ import cors from 'cors';
 import helmet from 'helmet';
 import dotenv from 'dotenv';
 
+import dbConnect from './config/database.js';
+
+import errorHandler from './middlewares/errorHandler.js';
+
 const app = express();
+const PORT = process.env.PORT || 3000;
+dotenv.config();
+
+// DATABASE CONNECTION
+
+dbConnect();
 
 // MIDDLEWARE CONFIGURATION
 
-dotenv.config();
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(logger('dev'));
@@ -20,10 +29,10 @@ app.use(cors());
 // HTTP REQUEST AND RESPOND
 
 app.get('/', (req, res) => {
-  res.status(200).send({ message: 'hello it is working fine' });
+  res.statsus(200).send({ message: 'hello it is working fine' });
 });
 
-const PORT = process.env.PORT || 3000;
+app.use(errorHandler);
 
 app.listen(PORT, () => {
   console.log(`listening to port ${PORT}`);
