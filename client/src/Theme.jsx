@@ -1,24 +1,30 @@
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import { CssBaseline, Box } from '@mui/material';
+import { grey } from '@mui/material/colors';
 
 function Theme({ children }) {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      <Box sx={{ backgroundColor: 'background.page', minHeight: '100vh' }}>{children}</Box>
+      <Box sx={{ backgroundColor: 'background.light', minHeight: '100vh' }}>{children}</Box>
     </ThemeProvider>
   );
 }
 
+const fontBase = {
+  display: 'block',
+};
+
 const theme = createTheme({
   palette: {
     background: {
-      page: '#0a1929',
+      light: grey[100],
+      dark: '#0a1929',
     },
     primary: {
       light: '#757ce8',
-      main: '#3f50b5',
-      dark: '#002884',
+      main: grey[900],
+      dark: 'blue',
       contrastText: '#fff',
     },
     secondary: {
@@ -27,6 +33,17 @@ const theme = createTheme({
       dark: '#ba000d',
       contrastText: '#000',
     },
+    button: {
+      main: grey[900],
+      contrastText: '#fff',
+    },
+  },
+  typography: {
+    sm: { ...fontBase, fontSize: 14 },
+    base: { ...fontBase, fontSize: 16 },
+    md: { ...fontBase, fontSize: 24 },
+    lg: { ...fontBase, fontSize: 32 },
+    xl: { ...fontBase, fontSize: 40 },
   },
 });
 

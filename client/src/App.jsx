@@ -9,7 +9,7 @@ function App() {
   return (
     <Router>
       <MainTheme>
-        <Container>
+        <Container color="white">
           <Routes>
             <Route path="/" element={<Landing />} />
             <Route path="/dashboard" element={<Dashboard />} />
