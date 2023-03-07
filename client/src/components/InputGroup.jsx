@@ -7,7 +7,7 @@ function InputGroup(props) {
       <Text variant="sm" marginBottom="8px">
         {title}
       </Text>
-      <OutlinedInput type={type} placeholder={placeholder} fullWidth={fullWidth} required={required} sx={{ borderRadius: '8px' }} />
+      <OutlinedInput type={type} placeholder={placeholder} fullWidth={fullWidth} required={required} size="small" sx={{ py: '4px' }} />
     </Box>
   );
 }
