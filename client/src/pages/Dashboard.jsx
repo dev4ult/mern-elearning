@@ -1,5 +1,11 @@
+import BreadcrumbsTop from '../components/BreadcrumbsTop';
+
 function Dashboard() {
-  return <div>Dashboard</div>;
+  return (
+    <div>
+      <BreadcrumbsTop onPage="Dashboard" />
+    </div>
+  );
 }
 
 export default Dashboard;
