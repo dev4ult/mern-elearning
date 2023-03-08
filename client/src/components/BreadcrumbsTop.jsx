@@ -1,4 +1,4 @@
-import { Breadcrumbs, Link, Typography as Text } from '@mui/material';
+import { Breadcrumbs, Link, Chip } from '@mui/material';
 import { Link as RouterLink } from 'react-router-dom';
 import { NavigateNext } from '@mui/icons-material';
 
@@ -13,9 +13,8 @@ function BreadcrumbsTop({ pageList = [{ name: '', link: '#' }], onPage = 'Dashbo
   return (
     <Breadcrumbs separator={separator}>
       {linkList()}
-      <Text color="white" bgcolor="black" p="4px 12px" borderRadius="100px">
-        {onPage}
-      </Text>
+
+      <Chip label={onPage} sx={{ fontWeight: '700', color: 'white', backgroundColor: 'black', fontSize: 16 }} />
     </Breadcrumbs>
   );
 }
