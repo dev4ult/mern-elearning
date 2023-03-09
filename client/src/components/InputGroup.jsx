@@ -1,14 +1,12 @@
-import { Box, OutlinedInput, Typography as Text } from '@mui/material';
+import { OutlinedInput, FormControl, InputLabel } from '@mui/material';
 
 function InputGroup(props) {
-  const { type = 'text', className = {}, title, placeholder, fullWidth = false, required = false } = props;
+  const { type = 'text', className = {}, label, placeholder, fullWidth = false, required = false } = props;
   return (
-    <Box sx={className} marginY="16px">
-      <Text variant="sm" marginBottom="8px">
-        {title}
-      </Text>
-      <OutlinedInput type={type} placeholder={placeholder} fullWidth={fullWidth} required={required} size="small" sx={{ py: '4px' }} />
-    </Box>
+    <FormControl sx={{ display: 'block', my: '16px', ...className }}>
+      <InputLabel>{label}</InputLabel>
+      <OutlinedInput placeholder={placeholder} required={required} fullWidth={fullWidth} />
+    </FormControl>
   );
 }
 

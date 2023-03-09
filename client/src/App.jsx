@@ -6,6 +6,7 @@ import Landing from './pages/Landing';
 import Dashboard from './pages/Dashboard';
 import Login from './pages/Login';
 import NotFound404 from './pages/NotFound404';
+import Courses from './pages/Courses';
 
 function App() {
   return (
@@ -14,8 +15,9 @@ function App() {
         <Container color="white">
           <Routes>
             <Route path="/" element={<Landing />} />
-            <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/login" element={<Login />} />
+            <Route path="/dashboard" element={<Dashboard />} />
+            <Route path="/courses" element={<Courses />} />
             <Route path="*" element={<NotFound404 />} />
           </Routes>
         </Container>

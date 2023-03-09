@@ -13,9 +13,9 @@ function Login() {
           <Text maxWidth="small" marginTop="24px">
             Login to get access to some courses
           </Text>
-          <Box textAlign="left" marginTop="32px" marginBottom="50px">
-            <InputGroup title="Email" type="email" placeholder="Type your email" fullWidth={true} required={true} />
-            <InputGroup title="Password" type="password" placeholder="Type your password" fullWidth={true} required={true} />
+          <Box marginTop="32px" marginBottom="50px">
+            <InputGroup label="Email" type="email" placeholder="Type your email" fullWidth={true} required={true} />
+            <InputGroup label="Password" type="password" placeholder="Type your password" fullWidth={true} required={true} />
           </Box>
           <Button type="submit" fullWidth variant="contained" size="large" color="button" sx={{ py: '10px', fontWeigth: 'bold' }}>
             login

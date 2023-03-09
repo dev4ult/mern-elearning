@@ -1,8 +1,10 @@
-import { Avatar, Box, Grid, Card, CardContent, CardActions, CardActionArea, Chip, Typography as Text } from '@mui/material';
+import { Box, Grid, Card, CardContent, CardActions, CardActionArea, Chip, Typography as Text } from '@mui/material';
 import { Link as RouterLink } from 'react-router-dom';
 
 import BreadcrumbsTop from '../components/BreadcrumbsTop';
 import Navbar from '../components/Navbar';
+import ProvileAvatar from '../components/ProfileAvatar';
+import SearchInput from '../components/SearchInput';
 
 import VectorDashboard from '../assets/dashboardVector.png';
 
@@ -11,7 +13,10 @@ function Dashboard() {
     <div>
       <Navbar>
         <BreadcrumbsTop onPage="Dashboard" pageList={[{ name: 'Home', link: '/' }]} />
-        <Avatar sx={{ bgcolor: 'black', width: 32, height: 32, fontSize: 16 }}>N</Avatar>
+        <Box display="flex" gap="16px" alignItems="center">
+          <SearchInput label="Search" placeholder="Courses..." />
+          <ProvileAvatar />
+        </Box>
       </Navbar>
       <Box display="flex" justifyContent="space-between" alignItems="center" gap="64px" py="24px">
         <div>
@@ -28,13 +33,13 @@ function Dashboard() {
                   boxShadow: 3,
                 },
                 backgroundColor: '#37F2A4',
-                border: 'none',
-                boxShadow: 'none',
+                border: '1.5px solid #37F2A4',
               }}
+              variant="outlined"
             >
-              <CardActionArea component={RouterLink} to="/" sx={{ p: '8px' }}>
+              <CardActionArea component={RouterLink} to="/courses" sx={{ p: '8px' }}>
                 <CardActions>
-                  <Chip label="Courses" size="small" sx={{ fontWeight: '700', backgroundColor: 'white' }} component="a" href="#basic-chip" />
+                  <Chip label="Courses" size="small" sx={{ fontWeight: '700', backgroundColor: 'white' }} />
                 </CardActions>
                 <CardContent>
                   <Text fontWeight="bold" variant="lg" lineHeight="1.3" mb="4px">
@@ -52,14 +57,14 @@ function Dashboard() {
                   boxShadow: 3,
                 },
                 backgroundColor: 'background.dark',
+                border: '1.5px solid black',
                 color: 'white',
-                border: 'none',
-                boxShadow: 'none',
               }}
+              variant="outlined"
             >
               <CardActionArea component={RouterLink} to="/" sx={{ p: '8px' }}>
                 <CardActions>
-                  <Chip label="Profile" size="small" sx={{ fontWeight: '700', backgroundColor: 'white' }} component="a" href="#basic-chip" />
+                  <Chip label="Profile" size="small" sx={{ fontWeight: '700', backgroundColor: 'white' }} />
                 </CardActions>
                 <CardContent>
                   <Text fontWeight="bold" variant="lg" lineHeight="1.3" mb="4px">
@@ -77,13 +82,13 @@ function Dashboard() {
                   boxShadow: 3,
                 },
                 backgroundColor: '#F9F143',
-                border: 'none',
-                boxShadow: 'none',
+                border: '1.5px solid #F9F143',
               }}
+              variant="outlined"
             >
               <CardActionArea component={RouterLink} to="/" sx={{ p: '8px' }}>
                 <CardActions>
-                  <Chip label="Notifications" size="small" sx={{ fontWeight: '700', backgroundColor: 'white' }} component="a" href="#basic-chip" />
+                  <Chip label="Notifications" size="small" sx={{ fontWeight: '700', backgroundColor: 'white' }} />
                 </CardActions>
                 <CardContent>
                   <Text fontWeight="bold" variant="lg" lineHeight="1.3" mb="4px">
@@ -107,7 +112,7 @@ function Dashboard() {
             >
               <CardActionArea component={RouterLink} to="/" sx={{ p: '8px' }}>
                 <CardActions>
-                  <Chip label="Last Visited" size="small" sx={{ fontWeight: '600', bgColor: 'white' }} component="a" href="#basic-chip" />
+                  <Chip label="Last Visited" size="small" sx={{ fontWeight: '600', bgColor: 'white' }} />
                 </CardActions>
                 <CardContent>
                   <Text fontWeight="bold" variant="lg" lineHeight="1.3" mb="4px">
