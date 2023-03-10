@@ -12,8 +12,8 @@ import Category from '../components/Category';
 
 function Courses() {
   const [categoryData, setCategoryData] = useState([
-    { key: 0, label: 'Pengantar TIK' },
-    { key: 1, label: 'Machine Learning' },
+    { key: 0, label: 'Public', activated: false },
+    { key: 1, label: 'Private', activated: false },
   ]);
 
   function deleteCategory(selectedChip) {
@@ -21,10 +21,12 @@ function Courses() {
   }
 
   const Categories = () => {
-    return categoryData.map((category) => <Category key={category.key} label={category.label} onDelete={deleteCategory.bind(null, category)} />);
+    return categoryData.map((category) => (category.activated ? <Category key={category.key} label={category.label} onDelete={deleteCategory.bind(null, category)} /> : ''));
   };
 
-  function addCategory() {}
+  function addCategory() {
+    console.log(e);
+  }
 
   return (
     <div>
@@ -45,10 +47,10 @@ function Courses() {
         <Stack mb="16px" gap="12px">
           <Stack direction="row" alignItems="center" gap="8px">
             <FormControl size="small" sx={{ minWidth: '150px' }}>
-              <InputLabel id="new-category-select">New Category</InputLabel>
-              <Select labelId="new-category-select" onChange={addCategory} label="New Category" sx={{ borderRadius: '100px' }}>
-                <MenuItem value="Pengantar TIK">Pengantar TIK</MenuItem>
-                <MenuItem value="Machine Learning">Machine Learning</MenuItem>
+              <InputLabel id="new-category-select">Add Category</InputLabel>
+              <Select labelId="new-category-select" onChange={addCategory} label="Add Category" sx={{ borderRadius: '100px' }}>
+                <MenuItem value="Public">Public</MenuItem>
+                <MenuItem value="Private">Private</MenuItem>
               </Select>
             </FormControl>
             <IconButton

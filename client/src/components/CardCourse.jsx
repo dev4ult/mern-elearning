@@ -2,10 +2,31 @@ import { Card, CardActionArea, Chip, CardActions, CardContent, Typography as Tex
 
 function CardCourse({ creator, title }) {
   return (
-    <Card variant="outlined" sx={{ backgroundColor: 'background.light', border: '1.5px solid black', transition: '300ms ease', ':hover': { backgroundColor: '#37F2A4', border: '1.5px solid #37F2A4', transition: '300ms ease' } }}>
+    <Card
+      variant="outlined"
+      sx={{
+        backgroundColor: 'background.light',
+        border: '1.5px solid black',
+        '&:hover': {
+          backgroundColor: 'black',
+          color: 'white',
+          '& .creatorChip': {
+            backgroundColor: 'white',
+            transition: '0ms',
+          },
+        },
+      }}
+    >
       <CardActionArea sx={{ p: '8px' }}>
         <CardActions>
-          <Chip label={creator} size="small" sx={{ fontWeight: '700' }} />
+          <Chip
+            className="creatorChip"
+            label={creator}
+            size="small"
+            sx={{
+              fontWeight: '700',
+            }}
+          />
         </CardActions>
         <CardContent>
           <Text variant="md" fontWeight="700">
