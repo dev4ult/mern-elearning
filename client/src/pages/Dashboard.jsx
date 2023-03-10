@@ -14,7 +14,7 @@ function Dashboard() {
       <Navbar>
         <BreadcrumbsTop onPage="Dashboard" pageList={[{ name: 'Home', link: '/' }]} />
         <Box display="flex" gap="16px" alignItems="center">
-          <SearchInput label="Search" placeholder="Courses..." />
+          <SearchInput placeholder="Search for courses..." />
           <ProvileAvatar />
         </Box>
       </Navbar>
@@ -26,7 +26,7 @@ function Dashboard() {
           <img src={VectorDashboard} alt="guy" />
         </div>
         <Grid container spacing={1}>
-          <Grid item xs="6">
+          <Grid item>
             <Card
               sx={{
                 ':hover': {
@@ -50,7 +50,7 @@ function Dashboard() {
               </CardActionArea>
             </Card>
           </Grid>
-          <Grid item xs="6">
+          <Grid item>
             <Card
               sx={{
                 ':hover': {
@@ -62,7 +62,7 @@ function Dashboard() {
               }}
               variant="outlined"
             >
-              <CardActionArea component={RouterLink} to="/" sx={{ p: '8px' }}>
+              <CardActionArea component={RouterLink} to="/profile" sx={{ p: '8px' }}>
                 <CardActions>
                   <Chip label="Profile" size="small" sx={{ fontWeight: '700', backgroundColor: 'white' }} />
                 </CardActions>
@@ -75,7 +75,7 @@ function Dashboard() {
               </CardActionArea>
             </Card>
           </Grid>
-          <Grid item xs="6">
+          <Grid item>
             <Card
               sx={{
                 ':hover': {
@@ -86,7 +86,7 @@ function Dashboard() {
               }}
               variant="outlined"
             >
-              <CardActionArea component={RouterLink} to="/" sx={{ p: '8px' }}>
+              <CardActionArea component={RouterLink} to="/history" sx={{ p: '8px' }}>
                 <CardActions>
                   <Chip label="Notifications" size="small" sx={{ fontWeight: '700', backgroundColor: 'white' }} />
                 </CardActions>
@@ -99,7 +99,7 @@ function Dashboard() {
               </CardActionArea>
             </Card>
           </Grid>
-          <Grid item xs="6">
+          <Grid item>
             <Card
               sx={{
                 ':hover': {

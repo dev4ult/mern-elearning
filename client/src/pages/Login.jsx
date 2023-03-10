@@ -13,7 +13,7 @@ function Login() {
           <Text maxWidth="small" marginTop="24px">
             Login to get access to some courses
           </Text>
-          <Box marginTop="32px" marginBottom="50px">
+          <Box textAlign="left" marginTop="32px" marginBottom="50px">
             <InputGroup label="Email" type="email" placeholder="Type your email" fullWidth={true} required={true} />
             <InputGroup label="Password" type="password" placeholder="Type your password" fullWidth={true} required={true} />
           </Box>
