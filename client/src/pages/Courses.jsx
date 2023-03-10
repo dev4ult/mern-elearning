@@ -11,21 +11,46 @@ import CardCourse from '../components/CardCourse';
 import Category from '../components/Category';
 
 function Courses() {
+  const [selectedCategory, setSelectedCategory] = useState('');
   const [categoryData, setCategoryData] = useState([
     { key: 0, label: 'Public', activated: false },
     { key: 1, label: 'Private', activated: false },
+    { key: 3, label: 'TIK', activated: false },
+    { key: 4, label: 'Admininstrasi Niaga', activated: false },
+    { key: 5, label: 'Teknik Elektro', activated: false },
+    { key: 6, label: 'Teknik Mesin', activated: false },
+    { key: 7, label: 'TGP', activated: false },
   ]);
 
-  function deleteCategory(selectedChip) {
-    setCategoryData((chips) => chips.filter((chip) => chip.key !== selectedChip.key));
+  function removeCategory(selectedChip) {
+    setCategoryData((prevCategoryData) =>
+      prevCategoryData.map((category) => ({
+        key: category.key,
+        label: category.label,
+        activated: category.key === selectedChip.key ? false : category.activated,
+      }))
+    );
   }
 
   const Categories = () => {
-    return categoryData.map((category) => (category.activated ? <Category key={category.key} label={category.label} onDelete={deleteCategory.bind(null, category)} /> : ''));
+    return categoryData.map((category) => (category.activated ? <Category key={category.key} label={category.label} onDelete={removeCategory.bind(null, category)} /> : ''));
   };
 
+  function handleCategory(e) {
+    setSelectedCategory(e.target.value);
+  }
+
   function addCategory() {
-    console.log(e);
+    if (selectedCategory) {
+      setCategoryData((prevCategoryData) =>
+        prevCategoryData.map((category) => ({
+          key: category.key,
+          label: category.label,
+          activated: category.label === selectedCategory ? true : category.activated,
+        }))
+      );
+    }
+    setSelectedCategory('');
   }
 
   return (
@@ -48,9 +73,8 @@ function Courses() {
           <Stack direction="row" alignItems="center" gap="8px">
             <FormControl size="small" sx={{ minWidth: '150px' }}>
               <InputLabel id="new-category-select">Add Category</InputLabel>
-              <Select labelId="new-category-select" onChange={addCategory} label="Add Category" sx={{ borderRadius: '100px' }}>
-                <MenuItem value="Public">Public</MenuItem>
-                <MenuItem value="Private">Private</MenuItem>
+              <Select labelId="new-category-select" value={selectedCategory} onChange={handleCategory} label="Add Category" sx={{ borderRadius: '100px' }}>
+                {categoryData.map((category) => (!category.activated ? <MenuItem value={category.label}>{category.label}</MenuItem> : ''))}
               </Select>
             </FormControl>
             <IconButton
