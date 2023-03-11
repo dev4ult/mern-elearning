@@ -91,7 +91,7 @@ function Courses() {
               <Add fontSize="inherit" />
             </IconButton>
           </Stack>
-          <Stack direction="row" gap="8px" width="fit-content">
+          <Stack direction="row" gap="8px" flexWrap="wrap" width="fit-content">
             {Categories()}
           </Stack>
         </Stack>
