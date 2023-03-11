@@ -11,6 +11,18 @@ const courseSchema = new Schema(
       type: String,
       required: [true, 'Please add the name of course s owner'],
     },
+    major: {
+      type: String,
+      required: [true, 'Please choose a major'],
+    },
+    accessibility: {
+      type: String,
+      enum: ['Public', 'Private'],
+      required: [true, 'Please choose the accesibility'],
+    },
+    key: {
+      type: String,
+    },
     student: {
       type: [String],
     },

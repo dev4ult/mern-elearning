@@ -8,9 +8,9 @@ const getCourses = asyncHandler(async (req, res) => {
 });
 
 const createCourse = asyncHandler(async (req, res) => {
-  const { name, owner } = req.body;
+  const { name, owner, accessibility, major, key } = req.body;
 
-  if (!name || !owner) {
+  if (!name || !owner || !accessibility || !major) {
     res.status(400);
     throw new Error('Please add all the required fields');
   }
@@ -18,6 +18,9 @@ const createCourse = asyncHandler(async (req, res) => {
   const course = await courseModel.create({
     name,
     owner,
+    accessibility,
+    major,
+    key,
   });
 
   if (course) {

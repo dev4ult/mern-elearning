@@ -1,7 +1,7 @@
 import { FormControl, OutlinedInput, IconButton } from '@mui/material';
 import { Search as SearchIcon } from '@mui/icons-material';
 
-function SearchInput({ placeholder }) {
+function SearchInput({ placeholder, onChange, value }) {
   return (
     <FormControl size="small">
       <OutlinedInput
@@ -9,6 +9,8 @@ function SearchInput({ placeholder }) {
         type="text"
         sx={{ borderRadius: '100px' }}
         placeholder={placeholder}
+        onChange={onChange}
+        value={value}
         endAdornment={
           <IconButton
             size="small"

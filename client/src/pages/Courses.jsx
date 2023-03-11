@@ -1,26 +1,36 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { allCourses } from '../features/course/courseSlice';
 
 import { Box, Stack, Grid, Typography as Text, IconButton, FormControl, InputLabel, Select, MenuItem } from '@mui/material';
-import { Add, Remove } from '@mui/icons-material';
+import { Add } from '@mui/icons-material';
 
 import Navbar from '../components/Navbar';
 import ProfileAvatar from '../components/ProfileAvatar';
 import BreadcrumbsTop from '../components/BreadcrumbsTop';
 import SearchInput from '../components/SearchInput';
-import CardCourse from '../components/CardCourse';
+import CardCourse from '../components/CourseCard';
 import Category from '../components/Category';
 
 function Courses() {
+  const { courses, isLoading } = useSelector((state) => state.course);
+  const dispatch = useDispatch();
+
+  const [searchCourse, setSearchCourse] = useState('');
+
   const [selectedCategory, setSelectedCategory] = useState('');
   const [categoryData, setCategoryData] = useState([
-    { key: 0, label: 'Public', activated: false },
-    { key: 1, label: 'Private', activated: false },
-    { key: 3, label: 'TIK', activated: false },
+    { key: 1, label: 'TIK', activated: false },
+    { key: 3, label: 'TMD', activated: false },
     { key: 4, label: 'Admininstrasi Niaga', activated: false },
-    { key: 5, label: 'Teknik Elektro', activated: false },
-    { key: 6, label: 'Teknik Mesin', activated: false },
-    { key: 7, label: 'TGP', activated: false },
+    { key: 4, label: 'Teknik Elektro', activated: false },
+    { key: 5, label: 'Teknik Mesin', activated: false },
+    { key: 6, label: 'TGP', activated: false },
   ]);
+
+  useEffect(() => {
+    dispatch(allCourses());
+  }, []);
 
   function removeCategory(selectedChip) {
     setCategoryData((prevCategoryData) =>
@@ -30,6 +40,10 @@ function Courses() {
         activated: category.key === selectedChip.key ? false : category.activated,
       }))
     );
+  }
+
+  function handleSearch(e) {
+    setSearchCourse(e.target.value.toLowerCase());
   }
 
   const Categories = () => {
@@ -64,7 +78,7 @@ function Courses() {
           ]}
         />
         <Box display="flex" gap="16px" alignItems="center">
-          <SearchInput label="Search" placeholder="Search for courses..." />
+          <SearchInput onChange={handleSearch} placeholder="Search for courses..." value={searchCourse} />
           <ProfileAvatar />
         </Box>
       </Navbar>
@@ -72,8 +86,8 @@ function Courses() {
         <Stack mb="16px" gap="12px">
           <Stack direction="row" alignItems="center" gap="8px">
             <FormControl size="small" sx={{ minWidth: '150px' }}>
-              <InputLabel id="new-category-select">Add Category</InputLabel>
-              <Select labelId="new-category-select" value={selectedCategory} onChange={handleCategory} label="Add Category" sx={{ borderRadius: '100px' }}>
+              <InputLabel id="new-category-select">Category</InputLabel>
+              <Select labelId="new-category-select" value={selectedCategory} onChange={handleCategory} label="Category" sx={{ borderRadius: '100px' }}>
                 {categoryData.map((category) => (!category.activated ? <MenuItem value={category.label}>{category.label}</MenuItem> : ''))}
               </Select>
             </FormControl>
@@ -95,26 +109,22 @@ function Courses() {
             {Categories()}
           </Stack>
         </Stack>
-        <Grid container spacing={2}>
-          <Grid item>
-            <CardCourse title="Machine Learning" creator="Nibras Alyassar" />
+        {isLoading ? (
+          <h3>Fetching Data</h3>
+        ) : (
+          <Grid container spacing={2}>
+            {courses.map((course) =>
+              (categoryData.every((category) => category.activated == false) || categoryData.some((category) => category.activated == true && category.label == course.major)) &&
+              (course.name.toLowerCase().match(searchCourse + '.*') || course.name.toLowerCase().match('/*.' + searchCourse)) ? (
+                <Grid key={course.id} item>
+                  <CardCourse data={course} />
+                </Grid>
+              ) : (
+                ''
+              )
+            )}
           </Grid>
-          <Grid item>
-            <CardCourse title="Machine Learning" creator="Nibras Alyassar" />
-          </Grid>
-          <Grid item>
-            <CardCourse title="Machine Learning" creator="Nibras Alyassar" />
-          </Grid>
-          <Grid item>
-            <CardCourse title="Machine Learning" creator="Nibras Alyassar" />
-          </Grid>
-          <Grid item>
-            <CardCourse title="Machine Learning" creator="Nibras Alyassar" />
-          </Grid>
-          <Grid item>
-            <CardCourse title="Machine Learning" creator="Nibras Alyassar" />
-          </Grid>
-        </Grid>
+        )}
       </Box>
     </div>
   );

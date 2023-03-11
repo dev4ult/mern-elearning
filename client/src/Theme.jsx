@@ -27,6 +27,12 @@ const theme = createTheme({
       dark: 'blue',
       contrastText: '#fff',
     },
+    public: {
+      main: '#37F2A4',
+    },
+    private: {
+      main: '#fc9003',
+    },
     secondary: {
       light: '#ff7961',
       main: '#f44336',
