@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { Link as RouterLink } from 'react-router-dom';
 import { Modal, Box, Card, CardActionArea, Chip, CardActions, CardContent, Typography as Text, Badge } from '@mui/material';
 
 const style = {
@@ -7,7 +8,6 @@ const style = {
   left: '50%',
   transform: 'translate(-50%, -50%)',
   bgcolor: 'background.light',
-  boxShadow: 24,
   borderRadius: '8px',
   p: 4,
 };
@@ -40,14 +40,13 @@ const cardStyle = {
 
 function CourseCard({ data }) {
   const [open, setOpen] = useState(false);
-
-  const { name, owner, accessibility, major } = data;
+  const { _id, name, owner, accessibility, major } = data;
 
   return (
     <>
       <Badge color={accessibility.toLowerCase()} badgeContent="">
         <Card variant="outlined" sx={cardStyle}>
-          <CardActionArea sx={{ p: '8px' }} onClick={setOpen.bind(null, true)}>
+          <CardActionArea sx={{ p: '8px' }} component={RouterLink} to={`/course?id=${_id}`}>
             <CardActions sx={{ gap: '16px', justifyContent: 'space-between' }}>
               <Chip className="ownerChip" label={owner} {...chipAttribute} />
               <Chip className="majorChip" color="primary" label={major} {...chipAttribute} />

@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { allCourses } from '../features/course/courseSlice';
+import { getCourses } from '../features/course/courseSlice';
 
 import { Box, Stack, Grid, Typography as Text, IconButton, FormControl, InputLabel, Select, MenuItem } from '@mui/material';
 import { Add } from '@mui/icons-material';
@@ -29,7 +29,7 @@ function Courses() {
   ]);
 
   useEffect(() => {
-    dispatch(allCourses());
+    dispatch(getCourses());
   }, []);
 
   function removeCategory(selectedChip) {

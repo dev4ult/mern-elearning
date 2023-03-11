@@ -9,9 +9,9 @@ const initialState = {
   message: '',
 };
 
-const allCourses = createAsyncThunk('course/allCourses', async (temp, thunkApi) => {
+const getCourses = createAsyncThunk('course/getCourses', async (temp, thunkApi) => {
   try {
-    return await courseService.allCourses();
+    return await courseService.getCourses();
   } catch (err) {
     const message = 'test';
 
@@ -19,22 +19,49 @@ const allCourses = createAsyncThunk('course/allCourses', async (temp, thunkApi) 
   }
 });
 
-export { allCourses };
+const findCourse = createAsyncThunk('course/findCourse', async (courseId, thunkApi) => {
+  try {
+    return await courseService.findCourse(courseId);
+  } catch (err) {
+    const message = 'test';
+
+    return thunkApi.rejectWithValue(message);
+  }
+});
+
+export { getCourses, findCourse };
 
 const courseSlice = createSlice({
   name: 'course',
   initialState,
-  reducers: {},
+  reducers: {
+    reset: initialState,
+  },
   extraReducers: (builder) => {
     builder
-      .addCase(allCourses.pending, (state) => {
+      .addCase(getCourses.pending, (state) => {
         state.isLoading = true;
       })
-      .addCase(allCourses.fulfilled, (state, action) => {
+      .addCase(getCourses.fulfilled, (state, action) => {
         state.isLoading = false;
-        (state.courses = [...action.payload]), (state.isSuccesfull = true);
+        state.courses = [...action.payload];
+        state.isSuccesfull = true;
       })
-      .addCase(allCourses.rejected, (state, action) => {
+      .addCase(getCourses.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isError = true;
+        state.courses = [];
+        state.message = action.payload;
+      })
+      .addCase(findCourse.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(findCourse.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.courses = [...action.payload];
+        state.isSuccesfull = true;
+      })
+      .addCase(findCourse.rejected, (state, action) => {
         state.isLoading = false;
         state.isError = true;
         state.courses = [];

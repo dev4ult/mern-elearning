@@ -7,6 +7,13 @@ const getCourses = asyncHandler(async (req, res) => {
   res.status(200).json(data);
 });
 
+const findCourse = asyncHandler(async (req, res) => {
+  const courseId = req.params.id;
+  const data = await courseModel.findById(courseId);
+
+  res.status(200).json(data);
+});
+
 const createCourse = asyncHandler(async (req, res) => {
   const { name, owner, accessibility, major, key } = req.body;
 
@@ -31,4 +38,4 @@ const createCourse = asyncHandler(async (req, res) => {
   }
 });
 
-export { getCourses, createCourse };
+export { getCourses, createCourse, findCourse };
