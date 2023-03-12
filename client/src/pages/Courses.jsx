@@ -4,6 +4,7 @@ import { useParams } from 'react-router-dom';
 import { getCourses, reset } from '../features/course/courseSlice';
 
 import { Box, Stack, Grid, FormControl, Select, MenuItem } from '@mui/material';
+import { CircularProgress } from '@mui/material';
 
 import Navbar from '../components/Navbar';
 import ProfileAvatar from '../components/ProfileAvatar';
@@ -18,7 +19,6 @@ function Courses() {
 
   const { searchKey } = useParams();
   const [searchCourse, setSearchCourse] = useState(searchKey ? searchKey : '');
-  console.log(searchKey);
 
   const [selectedCategory, setSelectedCategory] = useState('');
   const [categoryData, setCategoryData] = useState([
@@ -33,7 +33,6 @@ function Courses() {
   useEffect(() => {
     dispatch(reset());
 
-    console.log('reset');
     dispatch(getCourses());
   }, []);
 
@@ -65,10 +64,6 @@ function Courses() {
         }))
       );
     }
-  }
-
-  if (isLoading) {
-    return <div>loading</div>;
   }
 
   return (
@@ -111,7 +106,7 @@ function Courses() {
           </Stack>
         </Stack>
         {isLoading ? (
-          <h3>Fetching Data</h3>
+          <CircularProgress />
         ) : (
           <Grid container spacing={2}>
             {courses.map((course) =>
