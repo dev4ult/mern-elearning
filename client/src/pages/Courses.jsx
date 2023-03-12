@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useParams } from 'react-router-dom';
 import { getCourses, reset } from '../features/course/courseSlice';
 
 import { Box, Stack, Grid, FormControl, Select, MenuItem } from '@mui/material';
@@ -15,7 +16,9 @@ function Courses() {
   const { courses, isLoading } = useSelector((state) => state.course);
   const dispatch = useDispatch();
 
-  const [searchCourse, setSearchCourse] = useState('');
+  const { searchKey } = useParams();
+  const [searchCourse, setSearchCourse] = useState(searchKey ? searchKey : '');
+  console.log(searchKey);
 
   const [selectedCategory, setSelectedCategory] = useState('');
   const [categoryData, setCategoryData] = useState([
@@ -83,7 +86,6 @@ function Courses() {
           <ProfileAvatar />
         </Box>
       </Navbar>
-
       <Box py="24px">
         <Stack mb="16px" gap="12px">
           <Stack direction="row" alignItems="center" gap="8px">

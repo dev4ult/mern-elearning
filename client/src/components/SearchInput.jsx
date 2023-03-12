@@ -1,7 +1,8 @@
 import { FormControl, OutlinedInput, IconButton } from '@mui/material';
 import { Search as SearchIcon } from '@mui/icons-material';
+import { Link as RouterLink } from 'react-router-dom';
 
-function SearchInput({ placeholder, onChange, value }) {
+function SearchInput({ placeholder, onChange, value, link }) {
   return (
     <FormControl size="small">
       <OutlinedInput
@@ -19,6 +20,7 @@ function SearchInput({ placeholder, onChange, value }) {
                 backgroundColor: 'unset',
               },
             }}
+            href={link}
           >
             <SearchIcon sx={{ color: 'black' }} />
           </IconButton>

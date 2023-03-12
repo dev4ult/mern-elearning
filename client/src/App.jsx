@@ -21,6 +21,7 @@ function App() {
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/profile" element={<Profile />} />
             <Route path="/courses" element={<Courses />} />
+            <Route path="/courses/:searchKey" element={<Courses />} />
             <Route path="/course/:id" element={<CourseDetail />} />
             <Route path="*" element={<NotFound404 />} />
           </Routes>
