@@ -9,7 +9,8 @@ const getCourses = async () => {
 
 const findCourse = async (courseId) => {
   const response = await axios(API_URL + courseId);
+  return response.data;
 };
 
-const courseService = { getCourses };
+const courseService = { getCourses, findCourse };
 export default courseService;

@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { useSearchParams } from 'react-router-dom';
+import { useParams } from 'react-router';
 import { useDispatch, useSelector } from 'react-redux';
 import { findCourse } from '../features/course/courseSlice';
 import { Box } from '@mui/material';
@@ -11,8 +11,8 @@ import SearchInput from '../components/SearchInput';
 
 function CourseDetail() {
   const dispatch = useDispatch();
+  const { id } = useParams();
   const { courses, isLoading } = useSelector((state) => state.course);
-  const [searchParams, setSearchParams] = useSearchParams();
   const [searchCourse, setSearchCourse] = useState('');
 
   function handleSearch(e) {
@@ -20,21 +20,22 @@ function CourseDetail() {
   }
 
   useEffect(() => {
-    const courseId = searchParams.get('id');
-    dispatch(findCourse(courseId));
+    dispatch(findCourse(id));
   }, []);
+
+  if (isLoading) {
+    return <div>Loading</div>;
+  }
+
   return (
     <div>
       <Navbar>
         <BreadcrumbsTop
-          onPage="Test"
+          onPage={courses.name}
           pageList={[
-            {
-              name: 'Home',
-              link: '/',
-            },
+            { name: 'Home', link: '/' },
             { name: 'Dashboard', link: '/dashboard' },
-            { name: 'Courses', link: '/courses' },
+            { name: 'Courses', link: '/courses', unrefresh: true },
           ]}
         />
         <Box display="flex" gap="16px" alignItems="center">
@@ -42,6 +43,9 @@ function CourseDetail() {
           <ProfileAvatar />
         </Box>
       </Navbar>
+      <Box p="16px" border="2px solid black" borderRadius="12px" mt="16px">
+        test
+      </Box>
     </div>
   );
 }

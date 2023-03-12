@@ -46,7 +46,7 @@ function CourseCard({ data }) {
     <>
       <Badge color={accessibility.toLowerCase()} badgeContent="">
         <Card variant="outlined" sx={cardStyle}>
-          <CardActionArea sx={{ p: '8px' }} component={RouterLink} to={`/course?id=${_id}`}>
+          <CardActionArea sx={{ p: '8px' }} component={RouterLink} to={`/course/${_id}`}>
             <CardActions sx={{ gap: '16px', justifyContent: 'space-between' }}>
               <Chip className="ownerChip" label={owner} {...chipAttribute} />
               <Chip className="majorChip" color="primary" label={major} {...chipAttribute} />

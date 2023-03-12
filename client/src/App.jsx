@@ -12,7 +12,7 @@ import CourseDetail from './pages/CourseDetail';
 
 function App() {
   return (
-    <Router>
+    <Router forceRefresh={true}>
       <MainTheme>
         <Container color="white">
           <Routes>
@@ -21,7 +21,7 @@ function App() {
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/profile" element={<Profile />} />
             <Route path="/courses" element={<Courses />} />
-            <Route path="/course?id=/*" element={<CourseDetail />} />
+            <Route path="/course/:id" element={<CourseDetail />} />
             <Route path="*" element={<NotFound404 />} />
           </Routes>
         </Container>

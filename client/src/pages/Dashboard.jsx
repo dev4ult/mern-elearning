@@ -37,7 +37,7 @@ function Dashboard() {
               }}
               variant="outlined"
             >
-              <CardActionArea component={RouterLink} to="/courses" sx={{ p: '8px' }}>
+              <CardActionArea href="/courses" sx={{ p: '8px' }}>
                 <CardActions>
                   <Chip label="Courses" size="small" sx={{ fontWeight: '700', backgroundColor: 'white' }} />
                 </CardActions>

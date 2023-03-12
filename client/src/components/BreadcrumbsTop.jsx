@@ -2,13 +2,16 @@ import { Breadcrumbs, Link, Chip, Typography as Text } from '@mui/material';
 import { Link as RouterLink } from 'react-router-dom';
 import { NavigateNext } from '@mui/icons-material';
 
-function BreadcrumbsTop({ pageList = [{ name: '', link: '#' }], onPage = 'Dashboard', separator = <NavigateNext /> }) {
+function BreadcrumbsTop({ pageList = [{ name: '', link: '#', unrefresh: true }], onPage = 'Dashboard', separator = <NavigateNext /> }) {
   const linkList = () => {
-    return pageList.map((page) => (
-      <Link key="link" underline="hover" color="black" component={RouterLink} to={page.link}>
-        <Text variant="sm">{page.name}</Text>
-      </Link>
-    ));
+    return pageList.map((page) => {
+      const link = page.unrefresh ? { href: page.link } : { component: RouterLink, to: page.link };
+      return (
+        <Link key={page.name} underline="hover" color="black" {...link}>
+          <Text variant="sm">{page.name}</Text>
+        </Link>
+      );
+    });
   };
   return (
     <Breadcrumbs separator={separator}>

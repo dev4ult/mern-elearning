@@ -1,9 +1,8 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getCourses } from '../features/course/courseSlice';
+import { getCourses, reset } from '../features/course/courseSlice';
 
-import { Box, Stack, Grid, Typography as Text, IconButton, FormControl, InputLabel, Select, MenuItem } from '@mui/material';
-import { Add } from '@mui/icons-material';
+import { Box, Stack, Grid, FormControl, Select, MenuItem } from '@mui/material';
 
 import Navbar from '../components/Navbar';
 import ProfileAvatar from '../components/ProfileAvatar';
@@ -23,12 +22,15 @@ function Courses() {
     { key: 1, label: 'TIK', activated: false },
     { key: 3, label: 'TMD', activated: false },
     { key: 4, label: 'Admininstrasi Niaga', activated: false },
-    { key: 4, label: 'Teknik Elektro', activated: false },
-    { key: 5, label: 'Teknik Mesin', activated: false },
-    { key: 6, label: 'TGP', activated: false },
+    { key: 5, label: 'Teknik Elektro', activated: false },
+    { key: 6, label: 'Teknik Mesin', activated: false },
+    { key: 7, label: 'TGP', activated: false },
   ]);
 
   useEffect(() => {
+    dispatch(reset());
+
+    console.log('reset');
     dispatch(getCourses());
   }, []);
 
@@ -51,20 +53,19 @@ function Courses() {
   };
 
   function handleCategory(e) {
-    setSelectedCategory(e.target.value);
-  }
-
-  function addCategory() {
-    if (selectedCategory) {
+    if (e.target.value) {
       setCategoryData((prevCategoryData) =>
         prevCategoryData.map((category) => ({
           key: category.key,
           label: category.label,
-          activated: category.label === selectedCategory ? true : category.activated,
+          activated: category.label === e.target.value ? true : category.activated,
         }))
       );
     }
-    setSelectedCategory('');
+  }
+
+  if (isLoading) {
+    return <div>loading</div>;
   }
 
   return (
@@ -82,28 +83,26 @@ function Courses() {
           <ProfileAvatar />
         </Box>
       </Navbar>
+
       <Box py="24px">
         <Stack mb="16px" gap="12px">
           <Stack direction="row" alignItems="center" gap="8px">
             <FormControl size="small" sx={{ minWidth: '150px' }}>
-              <InputLabel id="new-category-select">Category</InputLabel>
-              <Select labelId="new-category-select" value={selectedCategory} onChange={handleCategory} label="Category" sx={{ borderRadius: '100px' }}>
-                {categoryData.map((category) => (!category.activated ? <MenuItem value={category.label}>{category.label}</MenuItem> : ''))}
+              <Select labelId="new-category-select" value={selectedCategory} onChange={handleCategory} displayEmpty sx={{ borderRadius: '100px' }}>
+                <MenuItem key={0} value="">
+                  Choose Category
+                </MenuItem>
+                {categoryData.map((category) =>
+                  !category.activated ? (
+                    <MenuItem key={category.key} value={category.label}>
+                      {category.label}
+                    </MenuItem>
+                  ) : (
+                    ''
+                  )
+                )}
               </Select>
             </FormControl>
-            <IconButton
-              size="small"
-              sx={{
-                color: 'white',
-                backgroundColor: 'black',
-                ':hover': {
-                  backgroundColor: 'black',
-                },
-              }}
-              onClick={addCategory}
-            >
-              <Add fontSize="inherit" />
-            </IconButton>
           </Stack>
           <Stack direction="row" gap="8px" flexWrap="wrap" width="fit-content">
             {Categories()}
@@ -116,7 +115,7 @@ function Courses() {
             {courses.map((course) =>
               (categoryData.every((category) => category.activated == false) || categoryData.some((category) => category.activated == true && category.label == course.major)) &&
               (course.name.toLowerCase().match(searchCourse + '.*') || course.name.toLowerCase().match('/*.' + searchCourse)) ? (
-                <Grid key={course.id} item>
+                <Grid key={course._id} item>
                   <CardCourse data={course} />
                 </Grid>
               ) : (

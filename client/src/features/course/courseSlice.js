@@ -35,7 +35,7 @@ const courseSlice = createSlice({
   name: 'course',
   initialState,
   reducers: {
-    reset: initialState,
+    reset: (state) => initialState,
   },
   extraReducers: (builder) => {
     builder
@@ -58,7 +58,7 @@ const courseSlice = createSlice({
       })
       .addCase(findCourse.fulfilled, (state, action) => {
         state.isLoading = false;
-        state.courses = [...action.payload];
+        state.courses = action.payload;
         state.isSuccesfull = true;
       })
       .addCase(findCourse.rejected, (state, action) => {
@@ -69,5 +69,7 @@ const courseSlice = createSlice({
       });
   },
 });
+
+export const { reset } = courseSlice.actions;
 
 export default courseSlice.reducer;
