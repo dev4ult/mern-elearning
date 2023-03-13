@@ -32,4 +32,4 @@ const courseSchema = new Schema(
   { timeStamps: true }
 );
 
-export default mongoose.model('Course', courseSchema);
+export default mongoose.model('courses', courseSchema);

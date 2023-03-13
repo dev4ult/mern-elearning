@@ -10,4 +10,4 @@ const lecturerSchema = new Schema(
   { timestamps: true }
 );
 
-export default mongoose.model('Lecturer', lecturerSchema);
+export default mongoose.model('lecturers', lecturerSchema);

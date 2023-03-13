@@ -12,7 +12,7 @@ import CourseDetail from './pages/CourseDetail';
 
 function App() {
   return (
-    <Router forceRefresh={true}>
+    <Router>
       <MainTheme>
         <Container color="white">
           <Routes>
