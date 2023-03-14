@@ -2,7 +2,7 @@ import mongoose, { Schema } from 'mongoose';
 
 const userSchema = new Schema(
   {
-    name: {
+    username: {
       type: String,
       required: [true, 'Please add name field'],
     },
