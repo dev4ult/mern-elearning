@@ -49,8 +49,8 @@ const courseSlice = createSlice({
       })
       .addCase(getCourses.rejected, (state, action) => {
         state.isLoading = false;
-        state.isError = true;
         state.courses = [];
+        state.isError = true;
         state.message = action.payload;
       })
       .addCase(findCourse.pending, (state) => {
