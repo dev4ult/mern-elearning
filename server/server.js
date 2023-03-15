@@ -8,6 +8,7 @@ import errorHandler from './middlewares/errorHandler.js';
 
 import dbConnect from './config/database.js';
 import courseRoutes from './routes/courseRoutes.js';
+import authRoutes from './routes/authRoutes.js';
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -29,6 +30,7 @@ app.use(cors());
 // HTTP REQUEST AND RESPOND
 
 app.use('/courses', courseRoutes);
+app.use('/users', authRoutes);
 
 app.use(errorHandler);
 
